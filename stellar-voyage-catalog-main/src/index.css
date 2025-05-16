@@ -1,0 +1,166 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 35% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 230 35% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 230 35% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 252 90% 62%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 14% 21%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 14% 21%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 220 14% 21%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 14% 21%;
+    --input: 220 14% 21%;
+    --ring: 252 90% 62%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 230 35% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 252 90% 62%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 230 30% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 230 30% 15%;
+    --sidebar-ring: 252 90% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-space-dark text-foreground antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+      radial-gradient(rgba(51, 195, 240, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    background-position: 0 0, 20px 20px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-space-dark/50;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-space-purple/50 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-space-purple;
+  }
+}
+
+/* Custom Space UI Classes */
+@layer components {
+  .space-card {
+    @apply bg-card/70 rounded-2xl overflow-hidden p-6 border border-space-purple/30
+           transition-all duration-500 backdrop-blur-md hover:border-space-purple/60
+           relative hover:-translate-y-2;
+  }
+  
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::after {
+    content: '';
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 
+           pointer-events-none;
+  }
+  
+  .glow-effect:hover::after {
+    @apply opacity-100;
+    box-shadow: 0 0 30px 5px var(--card-color, rgba(139,92,246,0.3));
+  }
+  
+  .star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+  }
+  
+  .star {
+    @apply absolute rounded-full;
+    animation: twinkle var(--twinkle-duration, 3s) ease-in-out infinite;
+    animation-delay: var(--twinkle-delay, 0s);
+  }
+}
+
+/* Keyframe animations */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: var(--opacity, 1);
+    transform: scale(1);
+  }
+  50% {
+    opacity: calc(var(--opacity, 1) * 0.5);
+    transform: scale(0.8);
+  }
+}
+
+@keyframes shooting-star {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-15deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(calc(20vw)) rotate(-15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-nebula {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(139, 92, 246, 0.5));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 15px rgba(139, 92, 246, 0.8));
+  }
+}
